@@ -38,7 +38,11 @@ AudioBuffer SineWave::generate_naive(const int duration_s, const int sample_rate
 	sine_wave_buffer.samples.resize(sample_count);
 	const size_t channel_count_sz = static_cast<size_t>(channel_count);
 	for (size_t i = 0; i < sample_count; i++) {
-		sine_wave_buffer.samples[i] = amplitude * std::sin(2 * std::numbers::pi * frequency * (static_cast<double>(i/ channel_count_sz) / sample_rate)); // i/channel_count is required to accumulate for channel interleaving
+		/*
+		* 1. i/channel_count is required to accumulate for channel interleaving
+		* 2. deliberately changed to float instead of double to hear precision loss
+		*/
+		sine_wave_buffer.samples[i] = amplitude * std::sin(2 * std::numbers::pi * frequency * (static_cast<float>(i/ channel_count_sz) / sample_rate)); 
 	}
 
 	return sine_wave_buffer;
