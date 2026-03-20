@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <chrono>
 
-AudioBuffer WhiteNoise::generateWhiteNoise(const int duration_s, const int sample_rate, const int channel_count) {
+AudioBuffer WhiteNoise::generate(const int duration_s, const int sample_rate, const int channel_count) {
 	if (duration_s <= 0) {
 		throw std::invalid_argument("Duration must be a positive integer!");
 	}

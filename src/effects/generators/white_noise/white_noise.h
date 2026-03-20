@@ -3,5 +3,5 @@
 
 class WhiteNoise {
 public:
-	static AudioBuffer generateWhiteNoise(const int duration_s, const int sample_rate, const int channel_count);
+	static AudioBuffer generate(const int duration_s, const int sample_rate, const int channel_count);
 };
