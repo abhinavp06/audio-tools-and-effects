@@ -7,6 +7,15 @@ AudioBuffer WhiteNoise::generate(const int duration_s, const int sample_rate, co
 	if (duration_s <= 0) {
 		throw std::invalid_argument("Duration must be a positive integer!");
 	}
+	/**
+	* Mono - 1 channel
+	* Stereo - 2 channels - left, right - most consumer audio
+	* LCR - 3 channels - left, center, right - used in film and some live sound rigs
+	* Quad - 4 channels - early surround sound format
+	* 5.1 - 6 channels - left, right, left surround, right surround, subwoofer - standard for film and home theater
+	* 7.1 - 8 channels - extend 5.1 with 2 more surround channels - cinema, high-end game audio
+	* Ambisonics - 4, 9 or 16 channels - spatial audio format for VR and immersive audio - channels represent spherical harmonics, not speaker positions
+	*/
 	if (channel_count <= 0) {
 		throw std::invalid_argument("Channel count must be a positive integer!");
 	}
