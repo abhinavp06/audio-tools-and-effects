@@ -80,6 +80,7 @@ AudioBuffer SquareWave::generate_naive(const int duration_s, const int sample_ra
  *   naive:       hard jump at phase = π → aliasing above nyquist
  *   bandlimited: smooth sum of sines   → no aliasing, cleaner sound
  ***/
+
 AudioBuffer SquareWave::generate(const int duration_s, const int sample_rate, const int channel_count, const double frequency, const double amplitude) {
 	if (duration_s <= 0) {
 		throw std::invalid_argument("Duration must be a positive integer!");
@@ -101,17 +102,30 @@ AudioBuffer SquareWave::generate(const int duration_s, const int sample_rate, co
 	const size_t sample_count = static_cast<size_t>(duration_s) * sample_rate * channel_count;
 
 	square_wave_buffer.samples.resize(sample_count);
-	double phase_increment = 2 * std::numbers::pi * frequency / sample_rate, phase = 0.0;
 	const size_t channel_count_sz = static_cast<size_t>(channel_count);
 	double max_sample_abs_value = 0.0;
-	int nyquist_limit = sample_rate / 2;
+	const double nyquist_limit = sample_rate / 2.0;
+	std::vector<Harmonic> harmonics;
+	int max_harmonic = static_cast<int>(nyquist_limit / frequency);
+	if (max_harmonic % 2 == 1) {
+		max_harmonic = max_harmonic / 2 + 1;
+	}
+	else {
+		max_harmonic = max_harmonic / 2;
+	}
+	harmonics.resize(max_harmonic);
+
+	for (size_t i = 0, j=1; i < harmonics.size(); i++, j+=2) {
+		harmonics[i].amplitude = 1.0 / j;
+		harmonics[i].phase_increment = 2 * std::numbers::pi * frequency * j / sample_rate;
+		harmonics[i].phase = 0.0;
+	}
+
 	for (size_t i = 0; i < sample_count; i++) {
 		double final_sample = 0.0;
-		int harmonic = 1;
 
-		while (frequency * harmonic <= nyquist_limit) {
-			final_sample += std::sin(harmonic * phase) / harmonic;
-			harmonic += 2;
+		for (auto& h : harmonics) {
+			final_sample += h.amplitude * std::sin(h.phase);
 		}
 
 		square_wave_buffer.samples[i] = final_sample;
@@ -121,10 +135,9 @@ AudioBuffer SquareWave::generate(const int duration_s, const int sample_rate, co
 		}
 
 		if (i % channel_count_sz == channel_count_sz - 1) { // channel_interleaving
-			phase += phase_increment;
-
-			if (phase >= 2 * std::numbers::pi) {
-				phase -= 2 * std::numbers::pi;
+			for (auto& h : harmonics) {
+				// fmod fixes the intensifying effect of noise over time
+				h.phase = std::fmod(h.phase + h.phase_increment, 2 * std::numbers::pi);
 			}
 		}
 	}
