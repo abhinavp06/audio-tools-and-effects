@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "atae/oscillators/square_wave.h"
 #include "atae/types/audio_buffer.h"
-#include "atae/types/harmonic.h"
 #include "atae/io/audio_file.h"
 
 int main() {
@@ -29,10 +28,11 @@ int main() {
 
 
 	try {
-		AudioBuffer square_wave_naive = SquareWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
+		SquareWave osc;
+		AudioBuffer square_wave_naive = osc.generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "square_wave_naive_output.wav", square_wave_naive);
 
-		AudioBuffer square_wave = SquareWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
+		AudioBuffer square_wave = osc.generate(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "square_wave_output.wav", square_wave);
 	}
 	catch (const std::exception& e) {

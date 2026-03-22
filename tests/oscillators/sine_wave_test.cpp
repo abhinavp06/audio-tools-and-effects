@@ -28,10 +28,11 @@ int main() {
 
 
 	try {
-		AudioBuffer sine_wave_naive = SineWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
+		SineWave osc;
+		AudioBuffer sine_wave_naive = osc.generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "sine_wave_naive_output.wav", sine_wave_naive);
 
-		AudioBuffer sine_wave = SineWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
+		AudioBuffer sine_wave = osc.generate(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "sine_wave_output.wav", sine_wave);
 	}
 	catch (const std::exception& e) {

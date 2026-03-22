@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "atae/oscillators/saw_wave.h"
 #include "atae/types/audio_buffer.h"
-#include "atae/types/harmonic.h"
 #include "atae/io/audio_file.h"
 
 int main() {
@@ -29,10 +28,11 @@ int main() {
 
 
 	try {
-		AudioBuffer saw_wave_naive = SawWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
+		SawWave osc;
+		AudioBuffer saw_wave_naive = osc.generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "saw_wave_naive_output.wav", saw_wave_naive);
 
-		AudioBuffer saw_wave = SawWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
+		AudioBuffer saw_wave = osc.generate(duration_s, sample_rate, channel_count, frequency, amplitude);
 		AudioFile::save(OUTPUT_DIR "saw_wave_output.wav", saw_wave);
 	}
 	catch (const std::exception& e) {
