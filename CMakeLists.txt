@@ -9,6 +9,7 @@ add_library(atae
 	src/oscillators/saw_wave.cpp
 	src/oscillators/sine_wave.cpp
 	src/oscillators/square_wave.cpp
+	src/oscillators/oscillator.cpp
 )
 
 target_include_directories(atae PUBLIC include tools/third_party tools)
