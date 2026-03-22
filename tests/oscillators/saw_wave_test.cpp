@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include "atae/oscillators/saw_wave.h"
 #include "atae/types/audio_buffer.h"
+#include "atae/types/harmonic.h"
 #include "atae/io/audio_file.h"
 
 int main() {

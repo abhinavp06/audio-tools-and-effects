@@ -1,12 +1,6 @@
 ﻿#pragma once
 #include "atae/types/audio_buffer.h"
 
-struct Harmonic {
-	double amplitude; // 1 / harmonic
-	double phase_increment; // 2π * f * harmonic / sample_rate
-	double phase; // current phase for this harmonic
-};
-
 class SquareWave {
 public:
 	static AudioBuffer generate_naive(const int duration_s, const int sample_rate, const int channel_count, const double frequency, const double amplitude);
