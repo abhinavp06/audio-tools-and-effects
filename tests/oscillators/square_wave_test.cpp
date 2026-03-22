@@ -29,10 +29,10 @@ int main() {
 
 	try {
 		AudioBuffer square_wave_naive = SquareWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("square_wave_naive_output.wav", square_wave_naive);
+		AudioFile::save(OUTPUT_DIR "square_wave_naive_output.wav", square_wave_naive);
 
 		AudioBuffer square_wave = SquareWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("square_wave_output.wav", square_wave);
+		AudioFile::save(OUTPUT_DIR "square_wave_output.wav", square_wave);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "[Error] " << e.what() << "\n";

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../../../../tools/audio_rw/audio_file.h"
+#include "atae/types/audio_buffer.h"
 
 struct Harmonic {
 	double amplitude; // 1 / harmonic

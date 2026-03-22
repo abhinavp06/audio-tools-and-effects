@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 #include "atae/noise/white_noise.h"
+#include "atae/types/audio_buffer.h"
+#include "atae/io/audio_file.h"
 
 int main() {
 	std::cout << "----- WHITE NOISE GENERATOR by abhinavp06 -----" << std::endl;
@@ -18,7 +20,7 @@ int main() {
 
 	try {
 		AudioBuffer white_noise = WhiteNoise::generate(duration_s, sample_rate, channel_count);
-		AudioFile::save("white_noise_output.wav", white_noise);
+		AudioFile::save(OUTPUT_DIR "white_noise_output.wav", white_noise);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "[Error] " << e.what() << "\n";

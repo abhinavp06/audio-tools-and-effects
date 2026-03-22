@@ -29,10 +29,10 @@ int main() {
 
 	try {
 		AudioBuffer saw_wave_naive = SawWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("saw_wave_naive_output.wav", saw_wave_naive);
+		AudioFile::save(OUTPUT_DIR "saw_wave_naive_output.wav", saw_wave_naive);
 
 		AudioBuffer saw_wave = SawWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("saw_wave_output.wav", saw_wave);
+		AudioFile::save(OUTPUT_DIR "saw_wave_output.wav", saw_wave);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "[Error] " << e.what() << "\n";

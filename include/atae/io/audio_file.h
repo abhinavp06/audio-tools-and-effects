@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "atae/types/audio_buffer.h"
 
 class AudioFile {
 public:
