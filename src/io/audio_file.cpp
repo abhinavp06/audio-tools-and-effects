@@ -1,4 +1,5 @@
-#include "audio_file.h"
+#include "atae/io/audio_file.h"
+#include "atae/types/audio_buffer.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>

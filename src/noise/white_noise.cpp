@@ -1,4 +1,4 @@
-#include "white_noise.h"
+#include "atae/noise/white_noise.h"
 #include <random>
 #include <stdexcept>
 #include <chrono>
@@ -32,6 +32,10 @@ AudioBuffer WhiteNoise::generate(const int duration_s, const int sample_rate, co
 	const size_t sample_count = static_cast<size_t>(duration_s) * sample_rate * channel_count;
 
 	white_noise_buffer.samples.resize(sample_count);
+	/*
+	* don't need to care about channels here since each sample is independent random noise
+	* every sample gets a fresh random value
+	*/
 	for (size_t i = 0; i < sample_count; i++) {
 		white_noise_buffer.samples[i] = dist(engine);
 	}

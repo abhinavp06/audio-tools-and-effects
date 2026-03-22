@@ -1,0 +1,68 @@
+﻿#include "atae/oscillators/sine_wave.h"
+#include "atae/types/audio_buffer.h"
+#include <cmath>
+#include <numbers>
+#include <stdexcept>
+
+/*
+* y(t) = A * sin(2π * f * t + φ)
+* Where:
+*	A - amplitude (volume, between 0.0, 1.0)
+*	f - frequency in Hz
+*	t - time in seconds
+*	φ - phase offset in radians - controls where in the cycle we start
+*
+* dt = 1 / sample_rate => t = i * dt = i / sample_rate => sample[i] = A * sin(2π * f * i / sample_rate)
+*
+*/
+
+AudioBuffer SineWave::generate_naive(const int duration_s, const int sample_rate, const int channel_count, const double frequency, const double amplitude) {
+	isValidRequest(duration_s, sample_rate, channel_count, frequency, amplitude);
+	AudioBuffer sine_wave_buffer = setupAudioBuffer(duration_s, sample_rate, channel_count);
+	const size_t channel_count_sz = static_cast<size_t>(channel_count);
+	for (size_t i = 0; i < sine_wave_buffer.samples.size(); i++) {
+		/*
+		* 1. i/channel_count is required to accumulate for channel interleaving
+		* 2. deliberately changed to float instead of double to hear precision loss
+		*/
+		sine_wave_buffer.samples[i] = amplitude * std::sin(2 * std::numbers::pi * frequency * (static_cast<float>(i/ channel_count_sz) / sample_rate)); 
+	}
+
+	return sine_wave_buffer;
+}
+
+/*
+* What happens when we generate a very long sine wave (maybe around 10 minutes at 44.1kHz)?
+* -> The value of i gets very large which makes i/sample_rate very large
+*	 Mathematically, it's fine since sine is periodic however float and double have their limitations
+*	 As the number gets larger, the sine wave slowly starts drifting our of tune
+* 
+* To fix this, phase accumulation is used
+* Instead of computing t from i every sample, a running phase variable is kept and incremented by a fixed amount each sample
+*   phase_increment = 2π * f / sample_rate
+*   phase = 0.0
+*   each sample:
+*       sample[i] = A * sin(phase)
+*       phase += phase_increment
+*       if phase >= 2π: phase -= 2π  ← keep phase in [0, 2π]
+*
+*/
+AudioBuffer SineWave::generate(const int duration_s, const int sample_rate, const int channel_count, const double frequency, const double amplitude) {
+	isValidRequest(duration_s, sample_rate, channel_count, frequency, amplitude);
+	AudioBuffer sine_wave_buffer = setupAudioBuffer(duration_s, sample_rate, channel_count);
+
+	double phase_increment = 2 * std::numbers::pi * frequency / sample_rate, phase = 0.0;
+	const size_t channel_count_sz = static_cast<size_t>(channel_count);
+	for (size_t i = 0; i < sine_wave_buffer.samples.size(); i++) {
+		sine_wave_buffer.samples[i] = amplitude * std::sin(phase);
+		if (i % channel_count_sz == channel_count_sz - 1) { // channel_interleaving
+			phase += phase_increment;
+
+			if (phase >= 2 * std::numbers::pi) {
+				phase -= 2 * std::numbers::pi;
+			}
+		}
+	}
+
+	return sine_wave_buffer;
+}

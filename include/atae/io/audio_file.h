@@ -1,12 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-
-struct AudioBuffer {
-    std::vector<double> samples; // Interleaved if stereo
-    int channels;
-    int sampleRate;
-};
+#include "atae/types/audio_buffer.h"
 
 class AudioFile {
 public:
