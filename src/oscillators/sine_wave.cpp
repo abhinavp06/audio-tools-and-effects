@@ -1,4 +1,5 @@
-﻿#include "sine_wave.h"
+﻿#include "atae/oscillators/sine_wave.h"
+#include "atae/types/audio_buffer.h"
 #include <cmath>
 #include <numbers>
 #include <stdexcept>

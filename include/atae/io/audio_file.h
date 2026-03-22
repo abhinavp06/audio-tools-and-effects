@@ -2,12 +2,6 @@
 #include <vector>
 #include <string>
 
-struct AudioBuffer {
-    std::vector<double> samples; // Interleaved if stereo
-    int channels;
-    int sampleRate;
-};
-
 class AudioFile {
 public:
     static AudioBuffer load(const std::string& path);

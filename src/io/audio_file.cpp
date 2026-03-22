@@ -1,12 +1,13 @@
-#include "audio_file.h"
+#include "atae/io/audio_file.h"
+#include "atae/types/audio_buffer.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 #define DR_FLAC_IMPLEMENTATION
-#include "dr_flac.h"
+#include "tools/third_party/dr_flac.h"
 #define DR_WAV_IMPLEMENTATION
-#include "dr_wav.h"
+#include "tools/third_party/dr_wav.h"
 
 static bool hasExtension(const std::string& filename, const std::string& ext) {
     if (filename.length() < ext.length()) {

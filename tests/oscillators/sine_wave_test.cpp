@@ -1,10 +1,11 @@
 #include <iostream>
 #include <stdexcept>
-#include "square_wave.h"
-#include "../../../../tools/audio_rw/audio_file.h"
+#include "atae/oscillators/sine_wave.h"
+#include "atae/types/audio_buffer.h"
+#include "atae/io/audio_file.h"
 
 int main() {
-	std::cout << "----- SQUARE WAVE GENERATOR by abhinavp06 -----" << std::endl;
+	std::cout << "----- SINE WAVE GENERATOR by abhinavp06 -----" << std::endl;
 
 	int duration_s, sample_rate, channel_count;
 	double frequency, amplitude;
@@ -27,11 +28,11 @@ int main() {
 
 
 	try {
-		AudioBuffer square_wave_naive = SquareWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("square_wave_naive_output.wav", square_wave_naive);
+		AudioBuffer sine_wave_naive = SineWave::generate_naive(duration_s, sample_rate, channel_count, frequency, amplitude);
+		AudioFile::save("sine_wave_naive_output.wav", sine_wave_naive);
 
-		AudioBuffer square_wave = SquareWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
-		AudioFile::save("square_wave_output.wav", square_wave);
+		AudioBuffer sine_wave = SineWave::generate(duration_s, sample_rate, channel_count, frequency, amplitude);
+		AudioFile::save("sine_wave_output.wav", sine_wave);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "[Error] " << e.what() << "\n";

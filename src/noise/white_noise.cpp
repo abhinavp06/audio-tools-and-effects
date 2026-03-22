@@ -1,4 +1,4 @@
-#include "white_noise.h"
+#include "atae/noise/white_noise.h"
 #include <random>
 #include <stdexcept>
 #include <chrono>

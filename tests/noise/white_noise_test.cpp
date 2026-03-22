@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-#include "white_noise.h"
-#include "../../../tools/audio_rw/audio_file.h"
+#include "atae/noise/white_noise.h"
 
 int main() {
 	std::cout << "----- WHITE NOISE GENERATOR by abhinavp06 -----" << std::endl;

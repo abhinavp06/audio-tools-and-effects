@@ -1,4 +1,5 @@
-﻿#include "saw_wave.h"
+﻿#include "atae/oscillators/saw_wave.h"
+#include "atae/types/audio_buffer.h"
 #include <cmath>
 #include <numbers>
 #include <stdexcept>
