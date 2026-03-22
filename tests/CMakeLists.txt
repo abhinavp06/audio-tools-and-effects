@@ -19,3 +19,8 @@ add_executable(square_wave_test oscillators/square_wave_test.cpp)
 target_link_libraries(square_wave_test PRIVATE atae)
 target_compile_definitions(square_wave_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(mixer_test mixer/mixer_test.cpp)
+target_link_libraries(mixer_test PRIVATE atae)
+target_compile_definitions(mixer_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")

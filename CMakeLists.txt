@@ -10,6 +10,7 @@ add_library(atae
 	src/oscillators/sine_wave.cpp
 	src/oscillators/square_wave.cpp
 	src/oscillators/oscillator.cpp
+	src/mixer/mixer.cpp
 )
 
 target_include_directories(atae PUBLIC include tools/third_party tools)
