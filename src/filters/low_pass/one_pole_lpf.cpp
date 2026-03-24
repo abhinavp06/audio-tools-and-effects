@@ -1,4 +1,5 @@
 ﻿#include <cmath>
+#include <cassert>
 #include <numbers>
 #include <stdexcept>
 #include <algorithm>
@@ -6,22 +7,24 @@
 
 /**
 * ωc​ = 2π * (fc/​fs)
-*​​ α = wc / (wc + 1)​​
+*​​ α = α = 1 − exp(−wc)
 */
 void OnePoleLpf::setCutoff(double cutoff_frequency, int sample_rate, int channel_count) {
     if (cutoff_frequency <= 0.0 || cutoff_frequency >= sample_rate / 2.0) {
         throw std::invalid_argument("Cutoff must be > 0 and < Nyquist!");
     }
     const double wc = 2.0 * std::numbers::pi * cutoff_frequency / sample_rate;
-    blendCoefficient = wc / (wc + 1.0);
+    blendCoefficient = 1 - std::exp(-1 * wc);
     oneMinusBlendCoefficient = 1.0 - blendCoefficient;
 
     previousOutputPerChannel.resize(channel_count);
-    std::fill(previousOutputPerChannel.begin(), previousOutputPerChannel.end(), 0);
+    std::fill(previousOutputPerChannel.begin(), previousOutputPerChannel.end(), 0.0);
 }
 
 // y[n] = α * x[n] + (1 − α) * y[n−1]
 void OnePoleLpf::apply(AudioBuffer& buffer) {
+    assert(previousOutputPerChannel.size() == buffer.channels);
+
     for (int ch = 0; ch < buffer.channels; ch++) {
         for (size_t i = ch; i < buffer.samples.size(); i += buffer.channels) {
             auto& sample = buffer.samples[i];
