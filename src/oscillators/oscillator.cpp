@@ -10,7 +10,7 @@ void Oscillator::isValidRequest(const int duration_s, const int sample_rate, con
 		throw std::invalid_argument("Channel count must be a positive integer!");
 	}
 	if (frequency > static_cast<double>(sample_rate) / 2) {
-		throw std::invalid_argument("Frequency must be greater than or equal to half of the sample rate!");
+		throw std::invalid_argument("Frequency must be greater than half of the sample rate!");
 	}
 	if (amplitude < 0.0 || amplitude > 1.0) {
 		throw std::invalid_argument("Amplitude must be between 0.0 and 1.0!");

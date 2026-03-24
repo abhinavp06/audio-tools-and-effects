@@ -24,3 +24,8 @@ add_executable(mixer_test mixer/mixer_test.cpp)
 target_link_libraries(mixer_test PRIVATE atae)
 target_compile_definitions(mixer_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(one_pole_lpf_test filters/low_pass/one_pole_lpf_test.cpp)
+target_link_libraries(one_pole_lpf_test PRIVATE atae)
+target_compile_definitions(one_pole_lpf_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
