@@ -40,7 +40,7 @@ int main() {
 		AudioBuffer square_wave = square_osc.generate(duration_s, sample_rate, channel_count, frequency, amplitude);
 		
 		OnePoleLpf lpf;
-		lpf.setCutoff(cutoff_frequency, sample_rate);
+		lpf.setCutoff(cutoff_frequency, sample_rate, channel_count);
 
 		AudioFile::save(OUTPUT_DIR "original_sine_wave.wav", sine_wave);
 		lpf.apply(sine_wave);
