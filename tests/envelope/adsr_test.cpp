@@ -24,7 +24,7 @@ int main() {
 
 		adsr.noteOn();
 
-		int total_samples = duration_s * sample_rate;
+		int total_samples = duration_s * sample_rate * channel_count;
 		int note_off_frame = (duration_s - static_cast<int>(release_s)) * sample_rate;
 
 		for (int i = 0; i < total_samples; i+= channel_count) {
@@ -33,7 +33,7 @@ int main() {
 				buffer.samples[j] *= processed_value;
 			}
 
-			if (i / channel_count == note_off_frame) {
+			if (i  == note_off_frame * channel_count) {
 				adsr.noteOff();
 			}
 		}

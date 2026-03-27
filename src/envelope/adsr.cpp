@@ -39,7 +39,12 @@ double Adsr::process() {
         if (currentValue >= 1.0) {
             state = AdsrState::Decay;
             currentValue = 1.0;
-            decayIncrement = (1.0 - sustainLevel) / decaySamples;
+            if (decaySamples <= 0) {
+                decayIncrement = 1.0;
+            }
+            else {
+                decayIncrement = (1.0 - sustainLevel) / decaySamples;
+            }
         }
         else {
             currentValue += attackIncrement;
@@ -47,6 +52,7 @@ double Adsr::process() {
         break;
     case AdsrState::Decay:
         if (currentValue <= sustainLevel) {
+            currentValue = sustainLevel;
             state = AdsrState::Sustain;
         }
         else {
@@ -54,9 +60,11 @@ double Adsr::process() {
         }
         break;
     case AdsrState::Sustain:
+        currentValue = sustainLevel;
         return sustainLevel;
     case AdsrState::Release:
         if (currentValue <= 0.0) {
+            currentValue = 0.0;
             state = AdsrState::Idle;
         }
         else {
