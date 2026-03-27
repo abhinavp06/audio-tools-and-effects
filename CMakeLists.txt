@@ -12,6 +12,7 @@ add_library(atae
 	src/oscillators/oscillator.cpp
 	src/mixer/mixer.cpp
 	src/filters/low_pass/one_pole_lpf.cpp
+	src/envelope/adsr.cpp
 )
 
 target_include_directories(atae PUBLIC include tools/third_party tools)
