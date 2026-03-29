@@ -13,6 +13,7 @@ add_library(atae
 	src/oscillators/oscillator.cpp
 	src/mixer/mixer.cpp
 	src/filters/low_pass/one_pole_lpf.cpp
+	src/filters/biquad/biquad_filter.cpp
 	src/envelope/adsr.cpp
 )
 

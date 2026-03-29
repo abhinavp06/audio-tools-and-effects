@@ -35,6 +35,11 @@ target_link_libraries(one_pole_lpf_test PRIVATE atae)
 target_compile_definitions(one_pole_lpf_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
 
+add_executable(biquad_filter_test filters/biquad/biquad_filter_test.cpp)
+target_link_libraries(biquad_filter_test PRIVATE atae)
+target_compile_definitions(biquad_filter_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
 add_executable(adsr_test envelope/adsr_test.cpp)
 target_link_libraries(adsr_test PRIVATE atae)
 target_compile_definitions(adsr_test PRIVATE 
