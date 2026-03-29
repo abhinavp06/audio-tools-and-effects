@@ -1,5 +1,8 @@
+#include <algorithm>
+#include <cassert>
 #include <cmath>
 #include <numbers>
+#include <ranges>
 #include <stdexcept>
 #include <vector>
 #include "atae/filters/biquad/biquad_filter.h"
@@ -84,4 +87,30 @@ void BiquadFilter::setCoefficients(BiquadFilterType filter_type, double cutoff_f
 	feedforward_b2 /= a0;
 	feedback_a1 /= a0;
 	feedback_a2 /= a0;
+}
+
+void BiquadFilter::apply(AudioBuffer& buffer) {
+	assert(x1PerChannel.size() == buffer.channels);
+	assert(sample_rate == buffer.sampleRate);
+
+	for (int ch = 0; ch < buffer.channels; ch++) {
+		for (size_t i = ch; i < buffer.samples.size(); i += buffer.channels) {
+			double xn = buffer.samples[i];
+			double yn = (feedforward_b0 * xn) + (feedforward_b1 * x1PerChannel[ch]) + (feedforward_b2 * x2PerChannel[ch]) - (feedback_a1 * y1PerChannel[ch]) - (feedback_a2 * y2PerChannel[ch]);
+
+			buffer.samples[i] = yn;
+			x2PerChannel[ch] = x1PerChannel[ch];
+			x1PerChannel[ch] = xn;
+			y2PerChannel[ch] = y1PerChannel[ch];
+			y1PerChannel[ch] = yn;
+		}
+
+	}
+}
+
+void BiquadFilter::reset() {
+	std::ranges::fill(x1PerChannel, 0.0);
+	std::ranges::fill(x2PerChannel, 0.0);
+	std::ranges::fill(y1PerChannel, 0.0);
+	std::ranges::fill(y2PerChannel, 0.0);
 }
