@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(atae
 	src/io/audio_file.cpp
 	src/noise/white_noise.cpp
+	src/noise/pink_noise.cpp
 	src/oscillators/saw_wave.cpp
 	src/oscillators/sine_wave.cpp
 	src/oscillators/square_wave.cpp

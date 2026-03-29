@@ -5,6 +5,11 @@ target_link_libraries(white_noise_test PRIVATE atae)
 target_compile_definitions(white_noise_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
 
+add_executable(pink_noise_test noise/pink_noise_test.cpp)
+target_link_libraries(pink_noise_test PRIVATE atae)
+target_compile_definitions(pink_noise_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
 add_executable(saw_wave_test oscillators/saw_wave_test.cpp)
 target_link_libraries(saw_wave_test PRIVATE atae)
 target_compile_definitions(saw_wave_test PRIVATE 
