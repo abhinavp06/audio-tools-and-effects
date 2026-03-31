@@ -1,0 +1,16 @@
+#pragma once
+#include <vector>
+
+class DelayLine {
+public:
+    void prepare(int sr, float max_delay_ms);
+    void setDelay(float delay_ms);
+    float processSample(float input);
+    void reset();
+private:
+    int delay_samples = 0;
+    int max_delay_samples = 0;
+    int sample_rate = 0;
+    int write_index = 0;
+    std::vector<float> delay_buffer;
+};
