@@ -6,10 +6,10 @@
 
 void DelayLine::prepare(int sr, float max_delay_ms) {
     if (max_delay_ms < 0.0f) {
-        throw new std::invalid_argument("Max delay should be greater than 0.0!");
+        throw std::invalid_argument("Max delay should be greater than 0.0!");
     }
     if (sr <= 0) {
-        throw new std::invalid_argument("Sample rate must be greater than 0!");
+        throw std::invalid_argument("Sample rate must be greater than 0!");
     }
 
     write_index = 0;
@@ -18,7 +18,7 @@ void DelayLine::prepare(int sr, float max_delay_ms) {
     max_delay_samples = max_delay_ms * (sr / 1000.0f);
 
     if (max_delay_samples < 1.0f) {
-        throw new std::invalid_argument("Buffer size is less than 1! Please increase your sample rate or max_delay_ms!");
+        throw std::invalid_argument("Buffer size is less than 1! Please increase your sample rate or max_delay_ms!");
     }
 
     delay_buffer.resize(static_cast<size_t>(std::ceil(max_delay_samples)) + 1);
@@ -28,7 +28,7 @@ void DelayLine::setDelay(float delay_ms) {
     float max_delay_ms = max_delay_samples * 1000.0f / sample_rate;
 
     if (delay_ms < 0.0f || delay_ms > max_delay_ms) {
-        throw new std::invalid_argument("Delay should be between 0.0 and max delay!");
+        throw std::invalid_argument("Delay should be between 0.0 and max delay!");
     }
 
     delay_samples = delay_ms * (sample_rate / 1000.0f);
