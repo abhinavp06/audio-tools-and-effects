@@ -44,3 +44,8 @@ add_executable(adsr_test envelope/adsr_test.cpp)
 target_link_libraries(adsr_test PRIVATE atae)
 target_compile_definitions(adsr_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(delay_line_test delay/delay_line_test.cpp)
+target_link_libraries(delay_line_test PRIVATE atae)
+target_compile_definitions(delay_line_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
