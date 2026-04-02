@@ -35,6 +35,8 @@ void DelayLine::prepare(int sr, float max_delay_ms_value) {
 
     delay_buffer.resize(pow2_size);
     buffer_mask = pow2_size - 1;
+
+    std::ranges::fill(delay_buffer, 0.0f);
 }
 
 void DelayLine::setDelay(float delay_ms) {
@@ -45,9 +47,7 @@ void DelayLine::setDelay(float delay_ms) {
     delay_samples = delay_ms * (sample_rate / 1000.0f);
 }
 
-float DelayLine::processSample(float input) {
-    delay_buffer[write_index] = input;
-
+float DelayLine::readDelayedSample() {
     float read_pos = static_cast<float>(write_index) - delay_samples;
     if (read_pos < 0.0f) {
         read_pos += static_cast<float>(delay_buffer.size());
@@ -63,10 +63,17 @@ float DelayLine::processSample(float input) {
     float sample0 = delay_buffer[index0];
     float sample1 = delay_buffer[index1];
 
-    float output = (1.0f - frac) * sample0 + frac * sample1;
+    return (1.0f - frac) * sample0 + frac * sample1;
+}
 
+void DelayLine::writeSample(float input) {
+    delay_buffer[write_index] = input;
     write_index = (write_index + 1) & buffer_mask;
+}
 
+float DelayLine::processSample(float input) {
+    float output = readDelayedSample();
+    writeSample(input);
     return output;
 }
 
