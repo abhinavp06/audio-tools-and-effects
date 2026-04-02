@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(atae
 	src/delay/delay_line.cpp
+	src/delay/feedback_delay.cpp
 	src/io/audio_file.cpp
 	src/noise/white_noise.cpp
 	src/noise/pink_noise.cpp

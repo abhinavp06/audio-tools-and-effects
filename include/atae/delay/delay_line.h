@@ -6,7 +6,10 @@ public:
     void prepare(int sr, float max_delay_ms);
     void setDelay(float delay_ms);
     float processSample(float input);
+    float readDelayedSample();
+    void writeSample(float input);
     void reset();
+
 private:
     float delay_samples = 0.0f;
     float max_delay_samples = 0.0f;
