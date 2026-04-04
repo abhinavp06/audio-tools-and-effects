@@ -1,3 +1,4 @@
+#pragma once
 #include "atae/delay/delay_line.h"
 
 class CombFilter {
