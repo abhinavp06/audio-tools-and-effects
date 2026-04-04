@@ -11,7 +11,7 @@ void CombFilter::setDelay(float delay_ms) {
 }
 
 void CombFilter::setGain(float g) {
-	if (g < 0.0 || g >= 1) {
+	if (g < 0.0f || g >= 1.0f) {
 		throw std::invalid_argument("Gain must be between 0.0 and 1.0!");
 	}
 	gain = g;
