@@ -1,0 +1,2 @@
+# What is this?
+Out of the 7 days in a week, I take 1 day off to just revise the things I have learnt and implemented. These files contain the questions and answers of topics covered under specific nodes (file title).
