@@ -23,3 +23,7 @@ float CombFilter::processSample(float input) {
 	delay_line.writeSample(output);
 	return output;
 }
+
+void CombFilter::reset() {
+	delay_line.reset();
+}

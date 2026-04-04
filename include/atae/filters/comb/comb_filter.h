@@ -7,6 +7,7 @@ public:
 	void setDelay(float delay);
 	void setGain(float g);
 	float processSample(float input);
+	void reset();
 private:
 	DelayLine delay_line;
 	float gain = 0.0f;
