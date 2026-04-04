@@ -16,6 +16,7 @@ add_library(atae
 	src/mixer/mixer.cpp
 	src/filters/low_pass/one_pole_lpf.cpp
 	src/filters/biquad/biquad_filter.cpp
+	src/filters/comb/comb_filter.cpp
 	src/envelope/adsr.cpp
 )
 
