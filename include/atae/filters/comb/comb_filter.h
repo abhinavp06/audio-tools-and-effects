@@ -8,7 +8,5 @@ public:
 	float processSample(float input);
 private:
 	DelayLine delay_line;
-	float delay_ms = 0.0f;
-	float delay_samples = 0.0f;
 	float gain = 0.0f;
 };
