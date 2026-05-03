@@ -18,7 +18,10 @@ add_library(atae
 	src/filters/biquad/biquad_filter.cpp
 	src/filters/comb/comb_filter.cpp
 	src/envelope/adsr.cpp
+	src/envelope/envelope_follower.cpp
+
+	tools/csv_writer.cpp
 )
 
-target_include_directories(atae PUBLIC include tools/third_party tools)
+target_include_directories(atae PUBLIC include tools tools)
 add_subdirectory(tests)
