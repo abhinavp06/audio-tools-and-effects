@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 /*
-* y(t) = sin(f) - sin(2f)/2 - sin(3f)/3 - sin(4f)/4 - sin(5f)/5 - sin(4f)/4 - sin(7f)/7 + ...
+* y(t) = sin(f) - sin(2f)/2 + sin(3f)/3 - sin(4f)/4 + sin(5f)/5 - sin(4f)/4 + sin(7f)/7 - ...
 */
 
 AudioBuffer SawWave::generate_naive(const int duration_s, const int sample_rate, const int channel_count, const double frequency, const double amplitude) {

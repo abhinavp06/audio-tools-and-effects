@@ -5,9 +5,9 @@
 #include <algorithm>
 
 #define DR_FLAC_IMPLEMENTATION
-#include "dr_flac.h"
+#include "third_party/dr_flac.h"
 #define DR_WAV_IMPLEMENTATION
-#include "dr_wav.h"
+#include "third_party/dr_wav.h"
 
 static bool hasExtension(const std::string& filename, const std::string& ext) {
     if (filename.length() < ext.length()) {

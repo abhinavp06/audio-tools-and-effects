@@ -69,3 +69,12 @@ int main() {
 
 	return 0;
 }
+
+/**
+ * My observations when testing:
+ * LPF has a very warm sound
+ * HPF's high pass is very clean.. i dont feel the high frequencies are clashing a lot.. although there is some sort of a "static" flavour attached to the sound
+ * lowshelf to me seems like if pink noise and a square wave had a child.. by that i mean the lower frequencies seem to be emphasised more... there's also a grittiness to it.. like those bit crusher sounds
+ * highshelf is very similar to the orignal but with the grittiness in the higher frequencies
+ * peakingshelf just feels louder than the original
+ */
