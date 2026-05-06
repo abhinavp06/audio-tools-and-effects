@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(atae
 	src/delay/delay_line.cpp
 	src/delay/feedback_delay.cpp
+	src/dynamics/compressor.cpp
 	src/io/audio_file.cpp
 	src/noise/white_noise.cpp
 	src/noise/pink_noise.cpp
@@ -19,7 +20,7 @@ add_library(atae
 	src/filters/comb/comb_filter.cpp
 	src/envelope/adsr.cpp
 	src/envelope/envelope_follower.cpp
-
+	
 	tools/csv_writer.cpp
 )
 
