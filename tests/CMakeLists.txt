@@ -64,3 +64,8 @@ add_executable(feedback_delay_test delay/feedback_delay_test.cpp)
 target_link_libraries(feedback_delay_test PRIVATE atae)
 target_compile_definitions(feedback_delay_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(compressor_test dynamics/compressor_test.cpp)
+target_link_libraries(compressor_test PRIVATE atae)
+target_compile_definitions(compressor_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
