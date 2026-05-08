@@ -69,3 +69,8 @@ add_executable(compressor_test dynamics/compressor_test.cpp)
 target_link_libraries(compressor_test PRIVATE atae)
 target_compile_definitions(compressor_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(limiter_test dynamics/limiter_test.cpp)
+target_link_libraries(limiter_test PRIVATE atae)
+target_compile_definitions(limiter_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
