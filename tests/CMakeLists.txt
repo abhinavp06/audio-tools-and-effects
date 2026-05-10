@@ -74,3 +74,8 @@ add_executable(limiter_test dynamics/limiter_test.cpp)
 target_link_libraries(limiter_test PRIVATE atae)
 target_compile_definitions(limiter_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(lfo_test modulation/lfo_test.cpp)
+target_link_libraries(lfo_test PRIVATE atae)
+target_compile_definitions(lfo_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
