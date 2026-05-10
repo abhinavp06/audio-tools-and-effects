@@ -75,6 +75,13 @@
 
 - **Node 21** -> Parameter Smoothing / De-Zippering  
   (1-pole smoothing, exponential smoothing for automation-safe knobs)
+```
+Claude: (in node 17 - lfo filer cutoff modulation)
+Inside your sample loop this then gets fed into setCoefficients() every single sample, recalculating all the biquad math (ω0\omega_0
+ω0​, α\alpha
+α, all five coefficients) each time.
+This is the expensive part. At 44100 Hz, you're calling that full trig computation 44100 times per second. Later — in Node 21, parameter smoothing — you'll learn how to avoid this cost. For now, feel it. Know why it hurts
+```
 
 - **Node 22** -> Audio Metering (Peak, RMS, dBFS)  
   (basic meters required for plugins)
