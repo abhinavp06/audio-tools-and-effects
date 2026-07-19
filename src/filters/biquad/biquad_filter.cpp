@@ -108,6 +108,16 @@ void BiquadFilter::apply(AudioBuffer& buffer) {
 	}
 }
 
+double BiquadFilter::processSample(double input, int channel) {
+	double xn = input;
+	double yn = (feedforward_b0 * xn) + (feedforward_b1 * x1PerChannel[channel]) + (feedforward_b2 * x2PerChannel[channel]) - (feedback_a1 * y1PerChannel[channel]) - (feedback_a2 * y2PerChannel[channel]);
+	x2PerChannel[channel] = x1PerChannel[channel];
+	x1PerChannel[channel] = xn;
+	y2PerChannel[channel] = y1PerChannel[channel];
+	y1PerChannel[channel] = yn;
+	return yn;
+}
+
 void BiquadFilter::reset() {
 	std::ranges::fill(x1PerChannel, 0.0);
 	std::ranges::fill(x2PerChannel, 0.0);
