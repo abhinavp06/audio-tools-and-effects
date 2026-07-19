@@ -9,6 +9,7 @@ public:
 	void prepare(int sr, int ch); // sample rate and channel count
 	void setCoefficients(BiquadFilterType filter_type, double cutoff_frequency, double quality_factor, double db_gain);
 	void apply(AudioBuffer& buffer);
+	double processSample(double input, int channel);
 	void reset();
 
 private:
