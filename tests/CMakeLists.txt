@@ -79,3 +79,8 @@ add_executable(lfo_test modulation/lfo_test.cpp)
 target_link_libraries(lfo_test PRIVATE atae)
 target_compile_definitions(lfo_test PRIVATE 
     OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
+
+add_executable(autowah_test modulation/autowah_test.cpp)
+target_link_libraries(autowah_test PRIVATE atae)
+target_compile_definitions(autowah_test PRIVATE 
+    OUTPUT_DIR="${ATAE_OUTPUT_DIR}")
